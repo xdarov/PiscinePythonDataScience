@@ -130,3 +130,5 @@ dmypy.json
 
 #rare ignore
 *.DS_Store
+ds.csv
+ds.tsv
