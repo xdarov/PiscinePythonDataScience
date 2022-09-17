@@ -24,7 +24,7 @@ class AllStocks:
             self.ticker_dict[elem[1]] = [elem[1], elem[0]]
             self.price_dict[elem[0].upper()] = [elem[0], self.STOCKS[self.COMPANIES[elem[0]]]]
 
-        
+
     def all_stocks(self, arg : str):
         # print(self.ticker_dict)
         # print(self.price_dict)
@@ -34,9 +34,6 @@ class AllStocks:
             print(f"{self.price_dict[arg.upper()][0]} is a ticker symbol for {self.price_dict[arg.upper()][1]}")
         else:
             print(f"{arg} is an unknown company or an unknown ticker symbol")
-
-
-    
 
 
 if __name__ == '__main__':

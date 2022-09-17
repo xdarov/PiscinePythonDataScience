@@ -18,10 +18,6 @@ def read_file():
     return '\n'.join(data)
 
 
-
-
-    
-
 if __name__ == "__main__":
     try:
         data = read_file()
