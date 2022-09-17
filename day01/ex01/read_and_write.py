@@ -25,12 +25,3 @@ if __name__ == "__main__":
             file.write(data)
     except (PermissionError, FileNotFoundError) as e:
         print('ERROR: ', e)
-
-
-
-
-
-
-
-
-
