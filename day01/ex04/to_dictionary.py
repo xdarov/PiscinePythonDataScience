@@ -26,12 +26,9 @@ def to_dictionary():
     rare_dict = {}
 
     for elem in list_of_tuples:
-        if elem[1] in rare_dict:
-            rare_dict[elem[1]] += ' ' + elem[0]
-        else:
-            rare_dict[elem[1]] = elem[0]
-    for elem in rare_dict:
-        print(f"'{elem}' : '{rare_dict[elem]}'")
+        rare_dict[f"'{elem[1]}' : '{elem[0]}'"] = ''
+    for elem in rare_dict.keys():
+        print(elem)
     
 
 if __name__ == '__main__':

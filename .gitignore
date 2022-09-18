@@ -133,3 +133,4 @@ dmypy.json
 ds.csv
 ds.tsv
 *.test
+data.csv

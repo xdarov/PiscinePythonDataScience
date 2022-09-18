@@ -31,7 +31,7 @@ class AllStocks:
         if arg.upper() in self.ticker_dict:
             print(f"{self.ticker_dict[arg.upper()][0]} is a ticker symbol for {self.ticker_dict[arg.upper()][1]}")
         elif arg.upper() in self.price_dict:
-            print(f"{self.price_dict[arg.upper()][0]} is a ticker symbol for {self.price_dict[arg.upper()][1]}")
+            print(f"{self.price_dict[arg.upper()][0]} stock price is {self.price_dict[arg.upper()][1]}")
         else:
             print(f"{arg} is an unknown company or an unknown ticker symbol")
 
