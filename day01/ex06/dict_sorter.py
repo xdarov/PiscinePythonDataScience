@@ -33,7 +33,7 @@ def dict_sorter():
     rare_list = sorted(rare_list)
     rare_list = sorted(rare_list, reverse=True, key=lambda typ: int(typ[1]))
     for elem in rare_list:
-        print(elem[0]) 
+        print(elem[0], elem[1]) 
 
 if __name__ == '__main__':
     dict_sorter()

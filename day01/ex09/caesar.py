@@ -3,15 +3,17 @@ import sys
 def encode(shift: int):
     result = ''
     shift = shift % 26
+    print(sys.argv[2])
     for i in sys.argv[2]:
         if ord(i) > 126:
             raise ValueError('The script does not support your language yet')
-        if i.isupper():
+        if i.isupper() and i.isalpha():
             result += chr(ord(i) + shift if ord(i) + shift < 91 else 65 + ord(i) + shift - 91)
-        elif i.islower():
+        elif i.islower() and i.isalpha():
             result += chr(ord(i) + shift if ord(i) + shift < 123 else 97 + ord(i) + shift - 123)
         else:
             result += i
+        # print(i, result[-1])
     return result
 
 def decode(shift: int):
@@ -20,9 +22,9 @@ def decode(shift: int):
     for i in sys.argv[2]:
         if ord(i) > 126:
             raise ValueError('The script does not support your language yet')
-        if i.isupper():
+        if i.isupper() and i.isalpha():
             result += chr(ord(i) - shift if ord(i) - shift > 64 else 91 - (65 - (ord(i) - shift)))
-        elif i.islower():
+        elif i.islower() and i.isalpha():
             result += chr(ord(i) - shift if ord(i) - shift > 96 else 123 - (97 - (ord(i) - shift)))
         else:
             result += i
