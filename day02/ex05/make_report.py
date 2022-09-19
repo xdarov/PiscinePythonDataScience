@@ -2,18 +2,13 @@ from config import NUM_OF_STEPS, FILE_NAME, TEMP, REPORT_NAME, REPORT_FORMAT
 from analytics import Research
 
 def main():
-    Research = Research(FILE_NAME)
-    data = Research.file_reader()
-    analyt = Research.Analytics(data)
+    research = Research(FILE_NAME)
+    data = research.file_reader()
+    analyt = research.Analytics(data)
     if data != None:
-        # print(data)
         counts = analyt.counts()
-        # print(*counts)
         fractions = analyt.fractions(*counts)
-        # print(*fractions)
         predict_random = analyt.predict_random(NUM_OF_STEPS)
-        # print(predict_random)
-        # print(analyt.predict_last(Research))
         report = TEMP.format(sum(counts), counts[0], counts[1],
                           fractions[0], fractions[1], NUM_OF_STEPS,
                           predict_random.count([1, 0]),
