@@ -1,4 +1,5 @@
-import sys
+from random import randint
+import logging
 
 
 class Research:
@@ -29,11 +30,13 @@ class Research:
     
     class Calculations:
 
-        @classmethod
-        def counts(cls, data: list):
+        def __init__(self, data: list):
+            self.data: list = data
+
+        def counts(self):
             heads = 0
             tails = 0
-            for i in data:
+            for i in self.data:
                 if i[0] == 1:
                     heads += 1
                 else:
@@ -44,18 +47,19 @@ class Research:
         def fractions(cls, head, tails):
             count = head + tails
             return  head / count * 100, tails / count * 100
-            
+    
 
-def main():
-    obj = Research(sys.argv[1])
-    data = obj.file_reader()
-    if data != None:
-        print(data)
-        counts = obj.Calculations.counts(data)
-        print(*counts)
-        print(*obj.Calculations.fractions(*counts))
+    class Analytics(Calculations):
+        
+        def predict_random(self, count):
+            return [[1,0] if randint(0,1) > 0 else [0,1] for i in range(count)]
 
+        def predict_last(self, Research):
+            data = Research.file_reader()
+            if len(data) > 0:
+                return data[-1]
+        
+        def save_file(self, data, file_name, extension):
+            with open(f"{file_name}.{extension}", 'w') as file:
+                file.write(str(data))
 
-if __name__ == '__main__':
-    if len(sys.argv) == 2:
-        main()

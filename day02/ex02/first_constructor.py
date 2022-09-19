@@ -1,7 +1,7 @@
 import sys
 
 
-class Must_read:
+class Research:
     def __init__(self, file_name: str) -> None:
         self.file_name = file_name
 
@@ -25,7 +25,7 @@ class Must_read:
 
 
 def main():
-    obj = Must_read(sys.argv[1])
+    obj = Research(sys.argv[1])
     data = obj.file_reader()
     if data != None:
         print(data)
