@@ -1,6 +1,6 @@
 from time import sleep
 import requests, sys
-from bs4 import BeautifulSoup, lxml
+from bs4 import BeautifulSoup
 
 
 def main(ticker, table):
@@ -23,6 +23,8 @@ def parse(ticker, table):
 		return None
 	soup = BeautifulSoup(response.text, "html.parser")
 	finance = soup.find_all('div', class_ = 'fi-row')
+	if not finance:
+		raise ConnectionError
 	tab = {}
 	for elem in finance:
 		try:

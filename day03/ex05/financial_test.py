@@ -1,3 +1,4 @@
+#!python3
 from time import sleep
 import requests, sys, pytest
 from bs4 import BeautifulSoup
