@@ -14,7 +14,6 @@ def main(ticker, table):
 
 	
 def parse(ticker, table):	
-	# sleep(5)
 	ticker = ticker
 	table = table
 	url = f'https://finance.yahoo.com/quote/{ticker}/financials?p={ticker}'
@@ -46,15 +45,13 @@ def parse(ticker, table):
 if __name__ == '__main__':
 	try:
 		if len(sys.argv) == 3:
-			out_stream = open('pstats-cumulative.txt', 'w')
-			profile = cProfile.Profile()
-
-			profile.enable()
-			main(sys.argv[1], sys.argv[2])
-			profile.disable()
-			ps = pstats.Stats(profile, stream=out_stream).sort_stats("cumulative")
-			ps.print_stats(5)
-
+			with open('pstats-cumulative.txt', 'w') as out_stream: 
+				profile = cProfile.Profile()
+				profile.enable()
+				main(sys.argv[1], sys.argv[2])
+				profile.disable()
+				ps = pstats.Stats(profile, stream=out_stream).sort_stats("cumulative")
+				ps.print_stats(5)
 		else:
 			raise ValueError('Count of arg')
 	except ValueError as e:
