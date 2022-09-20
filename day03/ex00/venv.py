@@ -1,8 +1,9 @@
+#!python3
 import os
 
 
 def main():
-    print(os.environ['VIRTUAL_ENV'])
+    print('Your current virtual env is ',os.environ['VIRTUAL_ENV'])
 
 
 if __name__ == '__main__':

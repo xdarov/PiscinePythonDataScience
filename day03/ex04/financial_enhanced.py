@@ -24,6 +24,8 @@ def parse(ticker, table):
 		return None
 	soup = BeautifulSoup(response.text, "lxml")
 	finance = soup.find_all('div', class_ = 'fi-row')
+	if not finance:
+		raise ConnectionError
 	tab = {}
 	for elem in finance:
 		try:
