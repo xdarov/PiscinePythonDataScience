@@ -1,6 +1,6 @@
 from time import sleep
 import requests, sys
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, lxml
 
 
 def main(ticker, table):
@@ -12,7 +12,7 @@ def main(ticker, table):
 		print(res)
 	
 def parse(ticker, table):	
-	# sleep(5)
+	sleep(5)
 	ticker = ticker
 	table = table
 	url = f'https://finance.yahoo.com/quote/{ticker}/financials?p={ticker}'
