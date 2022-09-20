@@ -11,7 +11,7 @@ def main():
 		print("wrong environment variable")
 	if venv:
 		if venv.endswith(f'ex02/{user}'):
-			os.system("pip3 install beautifulsoup4 PyTest > /dev/null; pip freeze; pip freeze  > requirements.txt")
+			os.system("pip3 install beautifulsoup4 PyTest requests lxml> /dev/null; pip3 freeze; pip3 freeze  > requirements.txt")
 			os.system(f"rm archive.tar 2> /dev/null;tar -c -f archive.tar {user}")
 		else:
 			raise ValueError("wrong environment variable")

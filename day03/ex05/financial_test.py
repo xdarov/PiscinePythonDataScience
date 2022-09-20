@@ -15,9 +15,9 @@ def test_parse_tuple():
 
 def test_parse_url():
     try:
-        parse('MSfdFT','Total Revenue')
+        parse('MSweFT','Total Revenue')
         assert False
-    except:
+    except ConnectionError:
         assert True
 
 
@@ -42,6 +42,8 @@ def parse(ticker, table):
 		return None
 	soup = BeautifulSoup(response.text, "html.parser")
 	finance = soup.find_all('div', class_ = 'fi-row')
+	if not finance:
+		raise ConnectionError
 	tab = {}
 	for elem in finance:
 		try:
