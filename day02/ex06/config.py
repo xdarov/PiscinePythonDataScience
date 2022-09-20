@@ -7,3 +7,8 @@ TEMP = "Report\nWe have made {} observations from tossing a \n" \
        "have: {} tail and {} heads."
 REPORT_NAME = 'report'
 REPORT_FORMAT = 'txt'
+
+MESSAGE_SUCCESS = {"text" : "The report has been successfully created"}
+MESSAGE_FAILURE = {"text" : "The report hasn’t been created due to an error"}
+
+WEBHOOK = 'https://www.google.com'

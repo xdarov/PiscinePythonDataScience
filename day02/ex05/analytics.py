@@ -53,8 +53,8 @@ class Research:
         def predict_random(self, count):
             return [[1,0] if randint(0,1) > 0 else [0,1] for i in range(count)]
 
-        def predict_last(self, Research):
-            data = Research.file_reader()
+        def predict_last(self, research):
+            data = research.file_reader()
             if len(data) > 0:
                 return data[-1]
         
