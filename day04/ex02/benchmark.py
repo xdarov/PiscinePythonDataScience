@@ -29,24 +29,23 @@ def filter_list(mail_list: list = get_mail_list()):
         if x.find('@gmail.com') >= 0:
             return x
     return list(filter(func, mail_list))
-    
+
 
 def main():
-    
     func_dict = {'list_comprehension': 'compr_list',
                  'loop': 'loop_list',
                  'map': 'map_list',
                  'filter': 'filter_list'}
     
-    if len(sys.argv) == 3 and sys.argv[1] in func_dict and sys.argv[2].isdigit():
+    if sys.argv[1] in func_dict and sys.argv[2].isdigit():
         time = timeit.timeit(f'{func_dict[sys.argv[1]]}()',
                                 f'from __main__ import {func_dict[sys.argv[1]]}',
                                 number=int(sys.argv[2]))
         print(time)
     else:
         print('Bad Arg')
-
     # print(loop_list(), compr_list(), map_list(), filter_list(), sep='\n')
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 3: 
+        main()

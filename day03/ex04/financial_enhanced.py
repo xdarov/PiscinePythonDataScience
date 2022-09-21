@@ -1,5 +1,4 @@
-from time import sleep
-import requests, sys, os
+import requests, sys, httpx
 from bs4 import BeautifulSoup
 import cProfile, pstats
 
@@ -18,11 +17,11 @@ def parse(ticker, table):
 	table = table
 	url = f'https://finance.yahoo.com/quote/{ticker}/financials?p={ticker}'
 	try:
-		response = requests.get(url,  headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'})
+		response = httpx.get(url,  headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'})
 	except requests.exceptions.ConnectionError as e:
 		print('Error: {}'.format(e))
 		return None
-	soup = BeautifulSoup(response.text, "lxml")
+	soup = BeautifulSoup(response.text, "html.parser")
 	finance = soup.find_all('div', class_ = 'fi-row')
 	if not finance:
 		raise ConnectionError

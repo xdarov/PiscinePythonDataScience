@@ -1,4 +1,5 @@
 #!python3
+import sys
 import timeit
 
 def get_mail_list():
@@ -21,10 +22,9 @@ def map_list(mail_list: list = get_mail_list()):
             result.append(x)
     list(map(func, mail_list))
     return result
-    
 
 def main():
-    n = 10000000
+    n = 1000000
     loop_time = timeit.timeit('loop_list()', 'from __main__ import loop_list', number=n)
 
     compr_time = timeit.timeit('compr_list()', 'from __main__ import compr_list', number=n)
@@ -37,10 +37,10 @@ def main():
         print('it is better to use a map')
     else:
         print('it is better to use a loop')
-    
-    print(*sorted([loop_time, compr_time, map_time]), sep=' vs ')
 
+    print(*sorted([loop_time, compr_time, map_time]), sep=' vs ')
     # print(loop_list(), compr_list(), map_list(), sep='\n')
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 1:
+        main()

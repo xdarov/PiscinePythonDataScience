@@ -8,19 +8,27 @@ def get_random_list():
     return [random.randint(0,100) for i in range(1000000)]
 
 def get_dict(rand_list: list = get_random_list()):
+    if not rand_list:
+        return
     dict_count = {}
     for i in set(rand_list):
         dict_count[i] = rand_list.count(i)
     return dict_count
 
-def top_numbers(dict_count: list = get_dict()):
+def top_numbers(dict_count: dict = get_dict()):
+    if not dict_count:
+        return
     list_tuple = sorted(dict_count.items(), key=lambda x: x[1], reverse=True)
     return [i[0] for i in list_tuple[:10]]
 
 def get_dict_counter(rand_list: list = get_random_list()):
+    if not rand_list:
+        return
     return Counter(rand_list)
 
 def top_numbers_counter(dict_count: Counter = get_dict_counter()):
+    if not dict_count:
+        return
     list_tuple = dict_count.most_common()
     return [i[0] for i in list_tuple[:10]]
 
