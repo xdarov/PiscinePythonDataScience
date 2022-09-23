@@ -1,4 +1,4 @@
-import os, sys, urllib, requests, json, pytest, collections, functools, datetime, re
+import re
 
 
 class Movies:
@@ -14,6 +14,7 @@ class Movies:
     def get_generator_file(self):
         try:
             with open(self.file_path, 'r') as file:
+                file.readline()
                 for row in file:
                     yield row
         except OSError as e:
@@ -27,19 +28,30 @@ class Movies:
         """
         release_years = {}
         for row in self.get_generator_file():
-            year = re.search(r'(\d\d\d\d)', row)[0]
+            year = re.search(r'\(\d\d\d\d[^,]', row)[0][1:5] \
+                    if re.search(r'\(\d\d\d\d[^,]', row) != None else None
             if year in release_years:
                 release_years[year] += 1
             else:
-                release_years[year] = 0
-            pass
+                release_years[year] = 1
+        release_years = dict(sorted(release_years.items(), key=lambda x: x[1], reverse=True))
         return release_years
     
     def dist_by_genres(self):
         """
         The method returns a dict where the keys are genres and the values are counts.
-     Sort it by counts descendingly.
+        Sort it by counts descendingly.
         """
+        genres = {}
+        for row in self.get_generator_file():
+            genres_list = row.split(',')[-1].split('|')
+            for genre in genres_list:
+                genre = genre.strip()
+                if genre in genres:
+                    genres[genre] += 1
+                else:
+                    genres[genre] = 1
+        genres = dict(sorted(genres.items(), key=lambda x: x[1], reverse=True))
         return genres
         
     def most_genres(self, n):
@@ -47,8 +59,18 @@ class Movies:
         The method returns a dict with top-n movies where the keys are movie titles and 
         the values are the number of genres of the movie. Sort it by numbers descendingly.
         """
+        movies = {}
+        for row in self.get_generator_file():
+            row = row.split(',')
+            genres_count = len(row[-1].split('|'))
+            title = row[1]
+            movies[title] = genres_count
+        movies = dict(sorted(movies.items(), key=lambda x: x[1], reverse=True)[:n])
         return movies
 
 
-# for i in Movies('ml-latest-small/movies.csv').get_generator_file():
-#     print(i)
+# if __name__ == '__main__':
+#     obj = Movies('ml-latest-small/movies.csv')
+#     print(obj.most_genres(5))
+#     print(obj.dist_by_genres())
+#     print(obj.dist_by_release())
